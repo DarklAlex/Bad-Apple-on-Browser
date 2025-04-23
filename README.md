@@ -1,10 +1,9 @@
 # 🎴 Bad Apple on Browser
 
-Yes. Yet another Bad Apple project. 
-
+Yes, we did it again. Another **Bad Apple** project.  
 So original, right? 
-
-Because there totally aren’t like 943 of these already. 
+Because the world clearly needed another one.  
+Hurrah for creativity... or something. 🙃
 
 🇪🇸 **(Versión en español abajo)**
 
@@ -13,26 +12,32 @@ Because there totally aren’t like 943 of these already.
 ## 🌟 Features
 
 - 🎥 **ASCII Animation**  
-  It's *actually* a video, but let’s keep that between us. 🤫
+  It's *totally* not a video. Nope, not at all. Just pure ASCII magic. ✨
 - 🎵 **Synchronized Audio**  
-  Powered by the magic of **HTML5™**.
+  Thanks to the marvels of **HTML5™**, because why not?
 - 📝 **Subtitles (.vtt)**  
-  Because even memes deserve accessibility.
+  Even memes deserve to be inclusive and accessible. 🫡
 - 🎨 **Eye-Friendly Design**  
-  A clean and simple layout that won't burn your retinas.
+  Minimalist, simple, and easy on the eyes. Your retinas will thank us.
 - 🕹️ **Inspired by Touhou Project**  
-  A tribute to the saga that's still alive and kicking.
+  A nostalgic nod to the series that refuses to fade away.
 
 ---
 
 ## 🚀 About This Project
 
-Yes, this is another **Bad Apple** project.  
-But this time, it’s in your browser, cleverly disguised to look like magic.  
+Yes, this is yet another **Bad Apple** project.  
+But this one lives in your browser, cleverly masquerading as a piece of art.  
 
-This project brings the iconic **Bad Apple!!** 
-animation to life in your browser, 
-blending ASCII art and synced audio for a unique experience.  
+Experience the legendary **Bad Apple!!** animation like never before,  
+with synchronized ASCII visuals and audio for maximum "wow, totally necessary" vibes.  
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).  
+Feel free to tinker with it, fork it, or just silently judge it.  
 
 ---
 
@@ -40,48 +45,48 @@ blending ASCII art and synced audio for a unique experience.
 
 ### 🇪🇸 Español
 
-### 🎴 Bad Apple en el Navegador
+# 🎴 Bad Apple en el Navegador
 
-Sí. Otro proyecto más de Bad Apple!!. 
-
+Sí, lo hicimos de nuevo. Otro proyecto más de **Bad Apple**.  
 Qué original, 
-
-¿verdad? 
-
-Porque claramente no existen ya como 943 versiones.
+¿verdad? Porque claramente el mundo necesitaba otro.  
+Hurra por la creatividad... o algo así. 🙃
 
 ---
 
 ### 🌟 Características
 
 - 🎥 **Animación en arte ASCII**  
-  Cof cof... en realidad es video, pero tú finge que no lo sabes.
+  Cof cof... en realidad es un video, pero tú haz como que no lo sabes. ✨
 - 🎵 **Audio sincronizado**  
-  Cortesía del viejo truco **HTML5™**.
+  Cortesía de las maravillas de **HTML5™**, porque claro que sí.
 - 📝 **Subtítulos (.vtt)**  
-  Porque incluso los memes merecen accesibilidad.
+  Porque incluso los memes merecen accesibilidad. 🫡
 - 🎨 **Diseño amigable para tus ojos**  
-  (Lo prometo... más o menos).
-- 🕹️ **Inspirado por Touhou**  
-  La saga que no sabemos cómo sigue viva.
+  Minimalista, simple y fácil de ver. Tus retinas nos lo agradecerán.
+- 🕹️ **Inspirado por Touhou Project**  
+  Un tributo a la saga que se niega a desaparecer.
 
 ---
 
 ### 🚀 Sobre Este Proyecto
 
-Sí, otro **Bad Apple**.  
-Pero este corre en el navegador y hace que parezca que no usa video.  
-Hurra. Qué genial ser tan originales en 2025.
+Sí, otro proyecto de **Bad Apple**.  
+Pero este corre en tu navegador, disfrazado de obra de arte.  
+
+Revive la icónica animación de **Bad Apple!!**  
+con gráficos ASCII sincronizados con audio,  
+porque claramente era necesario.  
 
 ---
 
-## 📄 Licencia
+### 📄 Licencia
 
-Este proyecto está distribuido bajo la [MIT License](LICENSE).  
-Siente la libertad de usarlo y modificarlo.
+Este proyecto está distribuido bajo la [Licencia MIT](LICENSE).  
+Siéntete libre de modificarlo, usarlo o simplemente juzgarlo en silencio.  
 
 ---
 
-Gracias por visitar este proyecto. 
-Si te gusta, 
+Gracias por pasar por aquí.  
+Si te gustó (o al menos te sacó una sonrisa irónica),  
 ¡no olvides dejar una estrella! ⭐
