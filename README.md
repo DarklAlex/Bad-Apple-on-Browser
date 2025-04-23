@@ -14,13 +14,16 @@ And yes, I did it myself—because why bother asking for help when you can suffe
   It’s *definitely* not a video. Nope, pure ASCII magic. ✨  
   (Okay, it’s a video. Don’t tell anyone.)
 - 🎵 **Synchronized Audio**  
-  Powered by **HTML5™**, because I’m too lazy to reinvent the wheel.
+  Powered by **HTML5™**, because reinventing the wheel is exhausting — 
+  (and no, I’m not about to invent “Wheel 2”)
 - 📝 **Subtitles (.vtt)**  
   Even memes deserve accessibility. You’re welcome.
 - 🎨 **Eye-Friendly Design**  
   Minimalist, because who has time for fancy UIs?
 - 🕹️ **Inspired by Touhou Project**  
-  A tribute to the series that just won’t die. Respect.
+  A tribute to the series that just won’t die....
+  We’re basically Doom porters at this point
+  For the love of everything, can we just let Bad Apple die already?
 
 ---
 
@@ -60,13 +63,16 @@ Y sí, lo hice yo solo—porque pedir ayuda es sobrevalorado. 🙃
   Es *totalmente* ASCII. Bueno, no, es un video.  
   Pero finge que no lo sabes. ✨
 - 🎵 **Audio sincronizado**  
-  Gracias a **HTML5™**, porque reinventar la rueda es cansado.
+  Impulsado por HTML5™, porque reinventar la rueda... que pereza
+  (y no, no pienso inventar la “Rueda 2”)
 - 📝 **Subtítulos (.vtt)**  
   Porque incluso los memes merecen accesibilidad. De nada.
 - 🎨 **Diseño amigable para tus ojos**  
   Minimalista, porque no tengo tiempo para interfaces bonitas.
 - 🕹️ **Inspirado por Touhou Project**  
-  Un tributo a la saga que se niega a desaparecer. Respeto.
+  Un tributo a la saga que se niega a desaparecer.....
+  Ya parecemos porters de Doom
+  ¡por el amor de Dios, dejemos morir a Bad Apple de una vez!
 
 ---
 
