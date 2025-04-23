@@ -1,7 +1,12 @@
 # 🎴 Bad Apple on Browser
 
-Yep, yet another **Bad Apple!!** project. So fresh. So unexpected.  
-So... totally not overdone. 🇪🇸 **(Versión en español abajo)**
+Yes. Yet another Bad Apple project. 
+
+So original, right? 
+
+Because there totally aren’t like 943 of these already. 
+
+🇪🇸 **(Versión en español abajo)**
 
 ---
 
@@ -35,8 +40,13 @@ This project brings the iconic **Bad Apple!!** animation to life in your browser
 
 ### 🎴 Bad Apple en el Navegador
 
-Sí, otro proyecto más de **Bad Apple!!**. Tan inesperado. Tan innovador.  
-Tan absolutamente nunca antes visto.
+Sí. Otro proyecto más de Bad Apple!!. 
+
+Qué original, 
+
+¿verdad? 
+
+Porque claramente no existen ya como 943 versiones.
 
 ---
 
