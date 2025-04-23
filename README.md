@@ -1,9 +1,8 @@
 # 🎴 Bad Apple on Browser
 
-Yes, we did it again. Another **Bad Apple** project.  
-So original, right? 
-Because the world clearly needed another one.  
-Hurrah for creativity... or something. 🙃
+Oh, look. Another **Bad Apple** project.  
+Because clearly, the world needed another one.  
+And yes, I did it myself—because why bother asking for help when you can suffer alone? 🙃
 
 🇪🇸 **(Versión en español abajo)**
 
@@ -12,32 +11,34 @@ Hurrah for creativity... or something. 🙃
 ## 🌟 Features
 
 - 🎥 **ASCII Animation**  
-  It's *totally* not a video. Nope, not at all. Just pure ASCII magic. ✨
+  It’s *definitely* not a video. Nope, pure ASCII magic. ✨  
+  (Okay, it’s a video. Don’t tell anyone.)
 - 🎵 **Synchronized Audio**  
-  Thanks to the marvels of **HTML5™**, because why not?
+  Powered by **HTML5™**, because I’m too lazy to reinvent the wheel.
 - 📝 **Subtitles (.vtt)**  
-  Even memes deserve to be inclusive and accessible. 🫡
+  Even memes deserve accessibility. You’re welcome.
 - 🎨 **Eye-Friendly Design**  
-  Minimalist, simple, and easy on the eyes. Your retinas will thank us.
+  Minimalist, because who has time for fancy UIs?
 - 🕹️ **Inspired by Touhou Project**  
-  A nostalgic nod to the series that refuses to fade away.
+  A tribute to the series that just won’t die. Respect.
 
 ---
 
 ## 🚀 About This Project
 
-Yes, this is yet another **Bad Apple** project.  
-But this one lives in your browser, cleverly masquerading as a piece of art.  
+Yes, I made another **Bad Apple** project.  
+Why? Because I could. And because procrastination is a lifestyle.  
 
-Experience the legendary **Bad Apple!!** animation like never before,  
-with synchronized ASCII visuals and audio for maximum "wow, totally necessary" vibes.  
+This project brings the iconic **Bad Apple!!** animation to your browser,  
+using ASCII art and synchronized audio to simulate effort.  
+It’s not groundbreaking, but hey, it works.  
 
 ---
 
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).  
-Feel free to tinker with it, fork it, or just silently judge it.  
+Feel free to use it, modify it, or just stare at it in mild confusion.  
 
 ---
 
@@ -47,46 +48,48 @@ Feel free to tinker with it, fork it, or just silently judge it.
 
 # 🎴 Bad Apple en el Navegador
 
-Sí, lo hicimos de nuevo. Otro proyecto más de **Bad Apple**.  
-Qué original, 
-¿verdad? Porque claramente el mundo necesitaba otro.  
-Hurra por la creatividad... o algo así. 🙃
+Oh, mira. Otro proyecto de **Bad Apple**.  
+Porque claramente el mundo necesitaba uno más.  
+Y sí, lo hice yo solo—porque pedir ayuda es sobrevalorado. 🙃
 
 ---
 
 ### 🌟 Características
 
 - 🎥 **Animación en arte ASCII**  
-  Cof cof... en realidad es un video, pero tú haz como que no lo sabes. ✨
+  Es *totalmente* ASCII. Bueno, no, es un video.  
+  Pero finge que no lo sabes. ✨
 - 🎵 **Audio sincronizado**  
-  Cortesía de las maravillas de **HTML5™**, porque claro que sí.
+  Gracias a **HTML5™**, porque reinventar la rueda es cansado.
 - 📝 **Subtítulos (.vtt)**  
-  Porque incluso los memes merecen accesibilidad. 🫡
+  Porque incluso los memes merecen accesibilidad. De nada.
 - 🎨 **Diseño amigable para tus ojos**  
-  Minimalista, simple y fácil de ver. Tus retinas nos lo agradecerán.
+  Minimalista, porque no tengo tiempo para interfaces bonitas.
 - 🕹️ **Inspirado por Touhou Project**  
-  Un tributo a la saga que se niega a desaparecer.
+  Un tributo a la saga que se niega a desaparecer. Respeto.
 
 ---
 
 ### 🚀 Sobre Este Proyecto
 
-Sí, otro proyecto de **Bad Apple**.  
-Pero este corre en tu navegador, disfrazado de obra de arte.  
+Sí, hice otro proyecto de **Bad Apple**.  
+¿Por qué? Porque puedo. 
+Y porque procrastinar es un arte.  
 
-Revive la icónica animación de **Bad Apple!!**  
-con gráficos ASCII sincronizados con audio,  
-porque claramente era necesario.  
+Este proyecto lleva la icónica animación de **Bad Apple!!**  
+a tu navegador, con arte ASCII y audio sincronizado  
+para dar la impresión de que me esforcé.  
+No es innovador, pero funciona.  
 
 ---
 
 ### 📄 Licencia
 
 Este proyecto está distribuido bajo la [Licencia MIT](LICENSE).  
-Siéntete libre de modificarlo, usarlo o simplemente juzgarlo en silencio.  
+Úsalo, modifícalo o simplemente míralo con confusión.  
 
 ---
 
 Gracias por pasar por aquí.  
-Si te gustó (o al menos te sacó una sonrisa irónica),  
+Si te gustó (o al menos te hizo sonreír un poco),  
 ¡no olvides dejar una estrella! ⭐
