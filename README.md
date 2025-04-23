@@ -30,7 +30,9 @@ Because there totally aren’t like 943 of these already.
 Yes, this is another **Bad Apple** project.  
 But this time, it’s in your browser, cleverly disguised to look like magic.  
 
-This project brings the iconic **Bad Apple!!** animation to life in your browser, blending ASCII art and synced audio for a unique experience.  
+This project brings the iconic **Bad Apple!!** 
+animation to life in your browser, 
+blending ASCII art and synced audio for a unique experience.  
 
 ---
 
@@ -80,4 +82,6 @@ Siente la libertad de usarlo y modificarlo.
 
 ---
 
-Gracias por visitar este proyecto. Si te gusta, ¡no olvides dejar una estrella! ⭐
+Gracias por visitar este proyecto. 
+Si te gusta, 
+¡no olvides dejar una estrella! ⭐
