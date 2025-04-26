@@ -78,7 +78,7 @@ Y sí, lo hice yo solo—porque pedir ayuda es sobrevalorado. 🙃
   Minimalista, porque no tengo tiempo para interfaces bonitas.
 
 - 🕹️ **Inspirado por Touhou Project**  
-  Un tributo a la saga que se niega a desaparecer...  
+  Un tributo a la saga que se niega a morir...  
   Ya parecemos porters de Doom.  
   ¡Por el amor de Dios, dejemos morir a Bad Apple de una vez!
 
