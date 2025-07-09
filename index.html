@@ -2,281 +2,711 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bad Apple!!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bad Apple!! ASCII Player</title>
     <style>
-        body {
-            background-color: black;
-            color: white;
-            font-family: monospace;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a; /* Fondo sólido, sin gradiente ni puntitos raros */
+            font-family: 'Courier New', monospace;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Vidrio esmerilado estilo Aero */
+        .aero-glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        #ascii-container {
+            position: relative;
+            width: 80vw;
+            height: 45vw;
+            max-width: 1280px;
+            max-height: 720px;
+            overflow: hidden; /* Que no se salga el texto */
+            background: rgba(10, 10, 10, 0.95); /* Fondo sólido, sin efectos raros */
+            aspect-ratio: 16/9;
+            display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
-            text-align: center;
+            cursor: none;
+            transition: all 0.5s ease;
+            box-shadow: 0 6px 40px rgba(0, 0, 0, 0.6); /* Sombra más suave, no tan exagerada */
+            animation: none; /* Sin animación líquida, más estable */
         }
 
         #ascii {
             white-space: pre;
-            font-size: 6px;
-            line-height: 6px;
-            color: black;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
-            margin: 0;
-            transition: color 10s;
+            font-size: 8px;
+            line-height: 8px;
+            color: #fff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Menos blur, más legible */
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.95); /* Fondo sólido */
+            -webkit-font-smoothing: subpixel-antialiased; /* Se ve más nítido */
+            -moz-osx-font-smoothing: grayscale;
+            padding: 20px; /* Para que no se corte el texto en los bordes */
         }
 
-        #start-button, #end-button {
-            background: linear-gradient(135deg, #7F4C8C, #D4A5A5);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 15px 30px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
-            margin: 20px;
+        .ascii-smooth {
+            image-rendering: optimizeSpeed;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: optimize-contrast;
+            -ms-interpolation-mode: nearest-neighbor;
         }
 
-        #start-button:hover, #end-button:hover {
-            background: linear-gradient(135deg, #D4A5A5, #7F4C8C);
-            transform: scale(1.05);
-        }
-
-        #start-button:focus, #end-button:focus {
-            outline: none;
-        }
-
-        #pause-message {
-            display: none;
-            color: white;
-            font-size: 20px;
-            margin-top: 20px;
-        }
-
-        #subtitles {
-            color: white;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-
-        #controls {
+        #controls-overlay {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        #fullscreen-control {
-            background: linear-gradient(135deg, #7F4C8C, #D4A5A5);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 10px;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
+        #controls-overlay:hover {
+            opacity: 1 !important;
         }
 
-        #fullscreen-control:hover {
-            background: linear-gradient(135deg, #D4A5A5, #7F4C8C);
-            transform: scale(1.05);
+        .controls-top {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
         }
 
-        #fullscreen-control:focus {
-            outline: none;
+        .controls-bottom {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 15px;
+            padding: 10px 15px;
+            pointer-events: all;
+        }
+
+        #volume-control {
+            width: 200px;
+            height: 40px;
         }
 
         #volume-slider {
             -webkit-appearance: none;
-            width: 100px;
-            height: 10px;
-            background: linear-gradient(135deg, #7F4C8C, #D4A5A5);
-            border-radius: 5px;
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
             outline: none;
-            opacity: 0.9;
-            transition: opacity 0.2s;
+            margin: 0;
         }
 
         #volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
             width: 20px;
             height: 20px;
-            background: #ffffff;
-            cursor: pointer;
+            background: #ff8e8e;
             border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        #volume-slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            background: #ffffff;
+        .control-btn {
+            background: rgba(255, 107, 107, 0.2);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
             cursor: pointer;
-            border-radius: 50%;
+            transition: 
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            pointer-events: all;
+        }
+
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .control-btn:hover::before {
+            opacity: 1;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
+            background: rgba(255, 107, 107, 0.3);
+        }
+
+        #subtitles {
+            position: absolute;
+            left: 50%;
+            bottom: 40px; /* Más cerca del borde inferior, pero no tan pegado */
+            transform: translateX(-50%) translateY(20px); /* Centrado horizontal y animación vertical */
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            min-width: 60%;
+            max-width: 90vw;
+            z-index: 5;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: 
+                transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.4s ease;
+        }
+
+        #subtitles.active {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            visibility: visible;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 24px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        #pause-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 24px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            display: none;
+            z-index: 10;
+        }
+
+        #end-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            display: none;
+            z-index: 10;
+        }
+
+        #end-screen h2 {
+            color: #fff;
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.8);
+        }
+
+        #end-screen button {
+            background: rgba(255, 107, 107, 0.2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #end-screen button:hover {
+            transform: scale(1.05);
+            background: rgba(255, 107, 107, 0.3);
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: 15px;
+        }
+
+        .gradient-border::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ff6b6b);
+            border-radius: 17px;
+            z-index: -1;
+        }
+
+        @media (max-width: 768px) {
+            .controls-top {
+                padding: 10px;
+            }
+
+            .controls-bottom {
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .control-group {
+                gap: 10px;
+                padding: 8px 12px;
+            }
+
+            #volume-control {
+                width: 150px;
+                height: 30px;
+            }
+
+            .control-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            #subtitles {
+                bottom: 90px;
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+
+        .color-transition {
+            transition: color 1.5s ease, text-shadow 1.5s ease; /* Más suave el cambio de color */
+        }
+
+        /* Brillo dinámico, pero menos intenso */
+        .glow {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(255,255,255,0) 45%,
+                rgba(255,255,255,0.15) 50%, /* Menos opacidad, menos molesto */
+                rgba(255,255,255,0) 55%
+            );
+            opacity: 0;
+            transition: transform 1.5s ease; /* Más suave la animación */
+            transform: translateX(-100%) rotate(45deg);
+        }
+
+        .glow:hover::after {
+            opacity: 0.5;
+            transform: translateX(100%) rotate(45deg);
+            transition: all 1s ease;
         }
     </style>
 </head>
 <body>
+    <div id="ascii-container" class="aero-glass">
+        <pre id="ascii" class="color-transition"></pre>
+        <div id="loading">Cargando...</div>
+        <div id="pause-message" class="aero-glass glow">Pausado. Haz clic para continuar.</div>
+        <div id="end-screen">
+            <h2>¡Animación Completa!</h2>
+            <button id="replay-btn" class="gradient-border glow">Reproducir</button>
+            <a href="https://www.youtube.com/watch?v=Y8WmIU7K_2k" target="_blank">
+                <button class="gradient-border glow">¡Uno! Tomas 4</button>
+            </a>
+        </div>
+        <div id="subtitles" class="aero-glass"></div>
+        <div id="controls-overlay">
+            <div class="controls-top">
+                <div class="control-group" id="volume-control">
+                    <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="1">
+                </div>
+                <div class="control-group" id="right-controls">
+                    <button id="start-btn" class="control-btn gradient-border glow">Reproducir</button>
+                    <button id="fullscreen-btn" class="control-btn gradient-border glow">Pantalla completa</button>
+                </div>
+            </div>
+            <div class="controls-bottom">
+                <div class="control-group">
+                    <span id="current-time">00:00</span>
+                    <span id="duration">00:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<pre id="ascii"></pre>
-<button id="start-button">Start</button>
-<div id="pause-message">Paused. Click to resume.</div>
-<div id="subtitles"></div>
-<button id="end-button" style="display:none;">Si quieres ver un video lol xd , te invito a ver este video XD!</button>
-<div id="controls">
-    <button id="fullscreen-control">Fullscreen</button>
-    <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="1">
-</div>
+    <script>
+        // Video y audio
+        const video = document.createElement('video');
+        video.src = '/video/bad_apple.mp4';
+        video.preload = 'auto';
+        video.muted = true;
+        video.loop = false;
 
-<script>
-    const video = document.createElement('video');
-    video.src = '/bad_apple/assets/videos/xyz123/bad/apple/bad_apple.mp4';
-    video.preload = 'auto';
-    video.muted = true;
-    video.loop = false;
+        const audio = new Audio('/audio/bad_apple_audio.mp3');
+        audio.preload = 'auto';
 
-    const asciiContainer = document.getElementById('ascii');
-    const startButton = document.getElementById('start-button');
-    const pauseMessage = document.getElementById('pause-message');
-    const endButton = document.getElementById('end-button');
-    const subtitles = document.getElementById('subtitles');
-    const fullscreenControl = document.getElementById('fullscreen-control');
-    const volumeSlider = document.getElementById('volume-slider');
-    const githubURL = 'https://www.youtube.com/watch?v=Y8WmIU7K_2k';
-    const audio = new Audio('/bad_apple/assets/videos/xyz123/bad/apple/bad_apple_audio.mp3');
+        // Elementos DOM
+        const asciiElement = document.getElementById('ascii');
+        const startBtn = document.getElementById('start-btn');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const volumeSlider = document.getElementById('volume-slider');
+        const loading = document.getElementById('loading');
+        const pauseMessage = document.getElementById('pause-message');
+        const endScreen = document.getElementById('end-screen');
+        const replayBtn = document.getElementById('replay-btn');
+        const subtitles = document.getElementById('subtitles');
+        const asciiContainer = document.getElementById('ascii-container');
+        const controlsOverlay = document.getElementById('controls-overlay');
+        const currentTimeElement = document.getElementById('current-time');
+        const durationElement = document.getElementById('duration');
 
+        // Estado del reproductor
+        let isPlaying = false;
+        let isFullscreen = false;
+        let isLoaded = false;
+        let controlsVisible = true;
+        let loadError = false;
 
-    const track = document.createElement('track');
-    track.src = 'subtitles.vtt';
-    track.kind = 'subtitles';
-    track.srclang = 'es';
-    track.label = 'Español';
-    track.default = true;
-    video.appendChild(track);
+        // Configuración ASCII
+        const grayScaleChars = "@#8&$%*o!,;::●".split('');
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
 
-    function startMedia() {
-        video.play();
-        audio.play();
-        startButton.style.display = 'none';
-        startColorCycle();
-        displayLyrics();
-    }
-
-    startButton.addEventListener('click', startMedia);
-
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-
-    video.addEventListener('loadeddata', () => {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        requestAnimationFrame(frameToASCII);
-    });
-
-    const grayScaleChars = "@#8&$%*o!,;::●".split('');
-
-    function frameToASCII() {
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const pixels = imageData.data;
-
-        let ascii = '';
-
-        for (let y = 0; y < canvas.height; y += 6) {
-            for (let x = 0; x < canvas.width; x += 3) {
-                const offset = (y * canvas.width + x) * 4;
-                const r = pixels[offset];
-                const g = pixels[offset + 1];
-                const b = pixels[offset + 2];
-
-                const gray = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-                const char = grayScaleChars[Math.floor((gray / 255) * (grayScaleChars.length - 1))];
-                ascii += char;
-            }
-            ascii += '\n';
+        // Nueva función robusta de carga de medios
+        function loadMedia(mediaElement) {
+            return new Promise((resolve, reject) => {
+                function cleanup() {
+                    mediaElement.removeEventListener('canplaythrough', onReady);
+                    mediaElement.removeEventListener('error', onError);
+                }
+                function onReady() {
+                    cleanup();
+                    resolve();
+                }
+                function onError(e) {
+                    cleanup();
+                    reject(new Error('Media failed to load: ' + (mediaElement.src || 'unknown')));
+                }
+                mediaElement.addEventListener('canplaythrough', onReady, { once: true });
+                mediaElement.addEventListener('error', onError, { once: true });
+            });
         }
 
-        asciiContainer.textContent = ascii;
-        requestAnimationFrame(frameToASCII);
-    }
+        // Manejo de error de medios
+        function handleMediaError(error) {
+            console.error('Error de medio:', error);
+            loading.textContent = 'Error de carga. Verifica los archivos.';
+            loadError = true;
+        }
 
-    function getRandomColor() {
-        let r, g, b;
-        do {
-            r = Math.floor(Math.random() * 128) + 64;
-            g = Math.floor(Math.random() * 128) + 64;
-            b = Math.floor(Math.random() * 128) + 64;
-        } while ((r > 180 && g > 180 && b > 180) || (g > 150 && r < 100 && b < 100));
+        // Inicializar reproductor robusto
+        async function initPlayer() {
+            try {
+                video.addEventListener('error', handleMediaError);
+                audio.addEventListener('error', handleMediaError);
 
-        return `rgb(${r}, ${g}, ${b})`;
-    }
+                await Promise.all([
+                    loadMedia(video),
+                    loadMedia(audio)
+                ]);
 
-    function startColorCycle() {
-        setInterval(() => {
-            asciiContainer.style.color = getRandomColor();
-        }, 2000);
-    }
+                isLoaded = true;
+                loading.style.display = 'none';
+                setupVideo();
+                setupSubtitles();
+                setupEventListeners();
+                setupMouseControls();
+                updateDuration();
+                startColorCycle();
+            } catch (error) {
+                handleMediaError(error);
+            }
+        }
 
-    function handleVisibilityChange() {
-        if (document.hidden) {
-            video.pause();
-            audio.pause();
-            pauseMessage.style.display = 'block';
-        } else {
+        function setupVideo() {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            asciiContainer.style.setProperty('--aspect-ratio', video.videoWidth / video.videoHeight);
+            window.addEventListener('resize', () => {
+                const width = asciiContainer.clientWidth;
+                const height = width * (video.videoHeight / video.videoWidth);
+                asciiContainer.style.height = `${height}px`;
+                if (!document.fullscreenElement) {
+                    asciiContainer.style.transition = 'all 0.3s ease';
+                }
+            });
+        }
+
+        // Mejorar el manejo de subtítulos
+        function setupSubtitles() {
+            const track = document.createElement('track');
+            track.src = 'subtitles.vtt';
+            track.kind = 'subtitles';
+            track.srclang = 'es';
+            track.label = 'Español';
+            track.default = true;
+            video.appendChild(track);
+
+            const textTrack = video.textTracks[0];
+            textTrack.mode = 'hidden';
+
+            textTrack.addEventListener('cuechange', () => {
+                const activeCue = textTrack.activeCues[0];
+                if (activeCue) {
+                    if (subtitles.timeoutId) clearTimeout(subtitles.timeoutId);
+
+                    subtitles.innerHTML = activeCue.text.replace('\n', '<br>');
+                    subtitles.classList.add('active');
+                    subtitles.style.visibility = 'visible';
+
+                    subtitles.style.removeProperty('transition');
+                    void subtitles.offsetWidth;
+                    subtitles.style.transition = `
+                        transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        opacity 0.4s ease
+                    `;
+                } else {
+                    subtitles.classList.remove('active');
+                    subtitles.timeoutId = setTimeout(() => {
+                        subtitles.innerHTML = '';
+                    }, 600);
+                }
+            });
+
+            subtitles.addEventListener('transitionend', (e) => {
+                if (e.propertyName === 'opacity' && !subtitles.classList.contains('active')) {
+                    subtitles.style.visibility = 'hidden';
+                }
+            });
+        }
+
+        function setupEventListeners() {
+            startBtn.addEventListener('click', togglePlayback);
+            fullscreenBtn.addEventListener('click', toggleFullscreen);
+            volumeSlider.addEventListener('input', updateVolume);
+            pauseMessage.addEventListener('click', togglePlayback);
+            replayBtn.addEventListener('click', replayVideo);
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+            video.addEventListener('ended', handleVideoEnd);
+            video.addEventListener('timeupdate', updateCurrentTime);
+        }
+
+        // Mejorar la detección de inactividad del mouse
+        let inactivityTimer;
+        const inactivityDelay = 3000;
+
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            controlsOverlay.style.opacity = '1';
+            inactivityTimer = setTimeout(hideControls, inactivityDelay);
+        }
+
+        function hideControls() {
+            controlsOverlay.style.opacity = '0';
+        }
+
+        // Sobrescribir la configuración del control del mouse
+        function setupMouseControls() {
+            asciiContainer.addEventListener('mousemove', resetInactivityTimer);
+            asciiContainer.addEventListener('mousedown', resetInactivityTimer);
+            resetInactivityTimer();
+        }
+
+        function togglePlayback() {
+            if (!isLoaded) return;
+
+            if (isPlaying) {
+                pauseMedia();
+            } else {
+                startMedia();
+            }
+        }
+
+        function startMedia() {
+            if (!isLoaded) return;
+
+            isPlaying = true;
+            startBtn.textContent = 'Pause';
             video.play();
             audio.play();
+            asciiContainer.classList.add('playing');
+            requestAnimationFrame(updateASCII);
             pauseMessage.style.display = 'none';
         }
-    }
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+        function pauseMedia() {
+            isPlaying = false;
+            startBtn.textContent = 'Play';
+            video.pause();
+            audio.pause();
+            asciiContainer.classList.remove('playing');
+            pauseMessage.style.display = 'block';
+        }
 
-    video.addEventListener('ended', () => {
-        video.pause();
-        audio.pause();
-        endButton.style.display = 'block';
-    });
-
-    endButton.addEventListener('click', () => {
-        window.location.href = githubURL;
-    });
-
-
-    function displayLyrics() {
-        const track = video.textTracks[0];
-        track.mode = 'hidden';
-
-        track.addEventListener('cuechange', () => {
-            const activeCue = track.activeCues[0];
-            if (activeCue) {
-                subtitles.innerHTML = activeCue.text.replace('\n', '<br>');
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                asciiContainer.requestFullscreen().catch(err => {
+                    console.error('Error al activar el modo de pantalla completa:', err);
+                });
+                fullscreenBtn.textContent = 'Salir de pantalla completa';
+                isFullscreen = true;
+                asciiContainer.style.transition = 'none';
             } else {
-                subtitles.innerHTML = '';
-            }
-        });
-    }
-
-
-    volumeSlider.addEventListener('input', () => {
-        audio.volume = volumeSlider.value;
-        video.volume = volumeSlider.value;
-    });
-
-
-    fullscreenControl.addEventListener('click', () => {
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
-        } else {
-            if (document.exitFullscreen) {
                 document.exitFullscreen();
+                fullscreenBtn.textContent = 'Pantalla completa';
+                isFullscreen = false;
+                setTimeout(() => {
+                    asciiContainer.style.transition = 'all 0.3s ease';
+                }, 300);
             }
         }
-    });
-</script>
 
+        function updateVolume() {
+            audio.volume = volumeSlider.value;
+            video.volume = volumeSlider.value;
+        }
+
+        function handleVideoEnd() {
+            pauseMedia();
+            endScreen.style.display = 'flex';
+        }
+
+        function replayVideo() {
+            endScreen.style.display = 'none';
+            video.currentTime = 0;
+            audio.currentTime = 0;
+            startMedia();
+        }
+
+        function handleVisibilityChange() {
+            if (document.hidden) {
+                pauseMedia();
+            }
+        }
+
+        function updateCurrentTime() {
+            const minutes = Math.floor(video.currentTime / 60);
+            const seconds = Math.floor(video.currentTime % 60);
+            currentTimeElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function updateDuration() {
+            const minutes = Math.floor(video.duration / 60);
+            const seconds = Math.floor(video.duration % 60);
+            durationElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function updateASCII() {
+            if (!isPlaying) return;
+
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const pixels = imageData.data;
+
+            let ascii = '';
+            let line = '';
+
+            for (let y = 0; y < canvas.height; y += 6) {
+                for (let x = 0; x < canvas.width; x += 3) {
+                    const offset = (y * canvas.width + x) * 4;
+                    const r = pixels[offset];
+                    const g = pixels[offset + 1];
+                    const b = pixels[offset + 2];
+
+                    const gray = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+                    const char = grayScaleChars[Math.floor((gray / 255) * (grayScaleChars.length - 1))];
+                    line += char;
+                }
+                ascii += line + '\n';
+                line = '';
+            }
+
+            asciiElement.textContent = ascii;
+
+            // Agregar mejoras de renderizado
+            asciiElement.style.transform = `translateZ(0)`; // Activar renderizado por hardware
+            asciiElement.classList.add('ascii-smooth');
+
+            requestAnimationFrame(updateASCII);
+        }
+
+        // Mejorar el cambio de color RGB
+        function startColorCycle() {
+            let hue = 0;
+            let saturation = 100;
+            let lightness = 80;
+            let direction = 0.1;
+
+            function animateColor() {
+                hue = (hue + direction) % 360;
+                const hslColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                asciiElement.style.color = hslColor;
+                asciiElement.style.textShadow = `0 0 15px hsla(${hue}, ${saturation}%, ${lightness}%, 0.5)`;
+                requestAnimationFrame(animateColor);
+            }
+
+            animateColor();
+        }
+
+        // Agregar efectos de vidrio esmerilado al contenedor ASCII
+        asciiContainer.classList.add('aero-glass');
+
+        // Iniciar el reproductor
+        initPlayer();
+    </script>
 </body>
 </html>
